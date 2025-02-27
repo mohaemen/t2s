@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "start": "node server.js"
+    "start": "webpack serve --config webpack.config.js"
   },
   "dependencies": {
     "@azure/communication-calling": "^1.16.3",
