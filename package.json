@@ -1,12 +1,25 @@
 {
+  "name": "acs-web-app",
+  "version": "1.0.0",
+  "description": "Azure Communication Services Web Calling App",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "@azure/communication-calling": "^1.16.3",
-    "@azure/communication-common": "^2.2.1"
+    "@azure/communication-common": "^2.2.1",
+    "@azure/communication-identity": "^1.2.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^11.0.0",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

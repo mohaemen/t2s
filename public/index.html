@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACS Call</title>
+    <script src="https://unpkg.com/@azure/communication-calling"></script>
+</head>
+<body>
+    <h2>Azure Communication Services Call</h2>
+    <label for="targetUser">Target User ID:</label>
+    <input type="text" id="targetUser" placeholder="Enter Target User ID">
+    <button id="callButton">Start Call</button>
+
+    <script>
+        async function startCall() {
+            const targetUserId = document.getElementById("targetUser").value.trim();
+            if (!targetUserId) {
+                alert("Please enter a valid Target User ID.");
+                return;
+            }
+
+            const response = await fetch('/token');
+            const data = await response.json();
+            const callClient = new AzureCommunicationCalling.CallClient();
+            const tokenCredential = new AzureCommunicationCommon.AzureCommunicationTokenCredential(data.token);
+            const callAgent = await callClient.createCallAgent(tokenCredential);
+            await callAgent.startCall([{ communicationUserId: targetUserId }]);
+        }
+
+        document.getElementById("callButton").addEventListener("click", startCall);
+    </script>
+</body>
+</html>
