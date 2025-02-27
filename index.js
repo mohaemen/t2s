@@ -8,6 +8,8 @@ AzureLogger.log = (...args) => {
     console.log(...args);
 };
 
+console.log("main.js is loaded!");
+
 // Calling web sdk objects
 let callAgent;
 let deviceManager;
