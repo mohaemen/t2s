@@ -18,25 +18,16 @@ const config = {
       },
     },
     extend: {
-      fontFamily: {
-        faktum: ['Faktum', 'sans-serif'],
-        inter: ['Inter', 'sans-serif'],
-      },
       colors: {
-        primary: {
-          DEFAULT: "#3a2544",
-          light: "#4a205e",
-          foreground: "#ffffff",
-        },
-        accent: {
-          DEFAULT: "#41e631",
-          foreground: "#ffffff",
-        },
-        background: "#f8f7f8",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
@@ -49,14 +40,22 @@ const config = {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
         },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
         },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        // MyBuilder specific colors
+        "mb-purple": "hsl(var(--mb-purple))",
+        "mb-green": "hsl(var(--mb-green))",
+        "mb-light-gray": "hsl(var(--mb-light-gray))",
       },
       borderRadius: {
         lg: "var(--radius)",

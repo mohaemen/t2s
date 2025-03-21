@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MyBuilder Clone
 
-## Getting Started
+A clone of the MyBuilder.com website built with Next.js and Tailwind CSS.
 
-First, run the development server:
+## Local Development
+
+1. Clone the repository
+2. Install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bun install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Start the development server:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+bun run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Learn More
+## Deploying to Azure Web App
 
-To learn more about Next.js, take a look at the following resources:
+This project is configured to deploy to Azure Web App using GitHub Actions.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Prerequisites
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. An Azure account with an active subscription
+2. An Azure Web App created and configured for Node.js
+3. GitHub repository with this code pushed to it
 
-## Deploy on Vercel
+### Setup Azure Web App
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Create a new Web App in Azure Portal
+   - Choose Node.js 18 LTS as the runtime stack
+   - Configure the Web App to use Linux OS
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. Get your publish profile:
+   - Go to your Web App in Azure Portal
+   - Click on "Get publish profile" and download the file
+   - This file contains credentials that GitHub Actions will use to deploy your application
+
+### Configure GitHub Actions
+
+1. Add the publish profile to your GitHub repository secrets:
+   - Go to your GitHub repository
+   - Navigate to Settings > Secrets and variables > Actions
+   - Click on "New repository secret"
+   - Name: `AZURE_WEBAPP_PUBLISH_PROFILE`
+   - Value: Paste the entire contents of the publish profile file
+   - Click "Add secret"
+
+2. Update the GitHub Actions workflow file:
+   - Open `.github/workflows/azure-deploy.yml`
+   - Change the `AZURE_WEBAPP_NAME` to match your Azure Web App name
+
+3. Push changes to your repository:
+   - The GitHub Actions workflow will automatically trigger on push to the main branch
+   - You can also manually trigger the workflow from the Actions tab in your GitHub repository
+
+### Troubleshooting Deployment
+
+If your deployment fails, check the following:
+
+1. Make sure the Web App name in the workflow file matches your actual Web App name in Azure
+2. Verify that your publish profile secret is correctly set in GitHub
+3. Check the GitHub Actions logs for detailed error messages
+4. Ensure your Azure Web App is configured for Node.js 18 or later
+
+## Application Structure
+
+- `src/components/layout`: Header and Footer components
+- `src/components/home`: Homepage-specific components
+- `public`: Static assets
+- `web.config`: Configuration for Azure IIS
+- `server.js`: Custom server for Azure
+
+## Technologies Used
+
+- Next.js 15
+- Tailwind CSS
+- Shadcn UI Components
+- Azure Web App for hosting
