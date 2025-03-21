@@ -2,8 +2,10 @@
 const nextConfig = {
   /* config options here */
   distDir: process.env.NODE_ENV === "production" ? "build" : ".next",
+  output: 'export',  // Required for static exports
   images: {
     unoptimized: true,
+    unoptimized: true,  // Required for static exports
     domains: [
       "source.unsplash.com",
       "images.unsplash.com",
@@ -32,6 +34,7 @@ const nextConfig = {
         pathname: "/**",
       },
     ],
+  },
   },
 };
 
