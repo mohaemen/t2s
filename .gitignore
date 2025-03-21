@@ -39,28 +39,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-# Add these to existing sections:
-
-# Next.js cache
-.next/cache/
-
-# Local development files
-.env.local
-.env.*.local
-
-# Azure deployment artifacts
-.azure/
-
-# Build files
-dist/
-*.zip
-
-# IDE specific files
-.vscode/
-.idea/
-*.iml
-
-# Debug files
-dump.rdb
-*.pid
-*.seed
