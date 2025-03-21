@@ -17,6 +17,7 @@ type ToastOptions = {
 };
 type ToastFunction = (options: ToastOptions) => void;
 
+// Create the context with the correct type
 const ToastContext = createContext<ToastFunction | null>(null);
 
 export function ToastWrapper({ children }: { children: ReactNode }) {
@@ -27,20 +28,22 @@ export function ToastWrapper({ children }: { children: ReactNode }) {
   };
 
   return (
-    <ToastContext.Provider value={toast}>
-      {children}
-      {toasts.map((toast, index) => (
-        <RadixToast
-          key={index}
-          duration={toast.duration || 5000}
-          onOpenChange={() => setToasts(prev => prev.filter((_, i) => i !== index))}
-        >
-          <ToastTitle>{toast.title}</ToastTitle>
-          <ToastDescription>{toast.description}</ToastDescription>
-        </RadixToast>
-      ))}
-      <ToastViewport className="fixed top-0 right-0 p-6" />
-    </ToastContext.Provider>
+    <ToastProvider>
+      <ToastContext.Provider value={toast}>
+        {children}
+        {toasts.map((toast, index) => (
+          <RadixToast
+            key={index}
+            duration={toast.duration || 5000}
+            onOpenChange={() => setToasts(prev => prev.filter((_, i) => i !== index))}
+          >
+            <ToastTitle>{toast.title}</ToastTitle>
+            <ToastDescription>{toast.description}</ToastDescription>
+          </RadixToast>
+        ))}
+        <ToastViewport className="fixed top-0 right-0 p-6" />
+      </ToastContext.Provider>
+    </ToastProvider>
   );
 }
 
