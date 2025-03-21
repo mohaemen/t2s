@@ -1,25 +1,3 @@
-"use client";
-
-import {
-  Toast as RadixToast,
-  ToastProvider,
-  ToastViewport,
-  ToastTitle,
-  ToastDescription,
-} from "@radix-ui/react-toast";
-import { ReactNode, createContext, useContext, useState } from "react";
-
-type ToastOptions = {
-  title?: ReactNode;
-  description?: ReactNode;
-  variant?: "default" | "destructive";
-  duration?: number;
-};
-type ToastFunction = (options: ToastOptions) => void;
-
-// Create the context with the correct type
-const ToastContext = createContext<ToastFunction | null>(null);
-
 export function ToastWrapper({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<ToastOptions[]>([]);
 
@@ -28,7 +6,7 @@ export function ToastWrapper({ children }: { children: ReactNode }) {
   };
 
   return (
-    <ToastProvider>
+    <ToastProvider> {/* Required by Radix UI */}
       <ToastContext.Provider value={toast}>
         {children}
         {toasts.map((toast, index) => (
@@ -45,12 +23,4 @@ export function ToastWrapper({ children }: { children: ReactNode }) {
       </ToastContext.Provider>
     </ToastProvider>
   );
-}
-
-export function useToast() {
-  const context = useContext(ToastContext);
-  if (!context) {
-    throw new Error("useToast must be used within a ToastWrapper");
-  }
-  return context;
 }
